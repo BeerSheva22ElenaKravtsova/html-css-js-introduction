@@ -1,0 +1,84 @@
+.cell{
+  height: 30px;
+  width: 30px;
+}
+
+.link-image{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.chess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 300px;
+  border: 1px solid black;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 300px;
+  margin: 0;
+}
+
+.number-letter{
+  font-weight: bold;
+  display: inline-block;
+  flex-direction: column;
+  margin: 0;
+  background-color: beige;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number-letter-inverted{
+  font-weight: bold;
+  display: inline-block;
+  flex-direction: column;
+  margin: 0;
+  transform: rotate(180deg);
+  background-color: beige;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.black {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  background-color: black;
+  border: 1px solid black;
+  transition: 1s;
+}
+
+.white {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  background-color: beige;
+  border: 1px solid black;
+}
+
+.black:hover, .white:hover{
+  transform: scale(1.5);
+}
