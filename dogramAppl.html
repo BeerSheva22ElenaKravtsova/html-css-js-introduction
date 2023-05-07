@@ -1,36 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- след строка привязывает px к ширине экрана (вместо разрашеющей способности экрана) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dogram</title>
     <link rel="stylesheet" href="styles/dogram.css">
+    <link rel="shortcut icon" href="images/dog-favicon.png" type="image/x-icon">
 </head>
+
 <body>
 
-    <h1>
-Dogs
+    <header>
+        <h3 class="logo">Dogram</h3>
+    </header>
 
-    </h1>
+    <main class="hidden">
+        <section class="details-section">
+            <div class="details-container" >
+                <img src="images/dog1.jpeg" class="details-image">
+                <span class="details-title"> XXXXXXXXX </span>
+                <!-- ссылка на JS -->
+                <button onclick= "hideDetails()" class="hide-button"> X </button>
+            </div>
+        </section>
 
-    <div>
+        <section class="thumbnails-section">
+            <ul class="thumbnails-list">
 
-        <ul>
-       <li> <img src="images/dog1.jpeg" alt="Dog1" class="link-image"></li>
-       <li> <img src="images/dog2.jpeg" alt="Dog2" class="link-image"></li>
-       <li> <img src="images/dog3.jpeg" alt="Dog3" class="link-image"></li>
-       <li> <img src="images/dog4.jpeg" alt="Dog4" class="link-image"></li>
-       <li> <img src="images/dog5.jpeg" alt="Dog5" class="link-image"></li>
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog1.jpeg"
+                        data-details-text="The most beautiful dog">
+                        <img src="images/dog1.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Buba</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog2.jpeg"
+                        data-details-text="The most dedicated dog">
+                        <img src="images/dog2.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Helper</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog3.jpeg"
+                        data-details-text="The most angry dog">
+                        <img src="images/dog3.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Bummer</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog4.jpeg"
+                        data-details-text="The most sweet dog">
+                        <img src="images/dog4.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Pushok</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog5.jpeg"
+                        data-details-text="The most lazy dog">
+                        <img src="images/dog5.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Sharik</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog1.jpeg"
+                        data-details-text="The most beautiful dog">
+                        <img src="images/dog1.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Buba</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog2.jpeg"
+                        data-details-text="The most dedicated dog">
+                        <img src="images/dog2.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Helper</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog3.jpeg"
+                        data-details-text="The most angry dog">
+                        <img src="images/dog3.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Bummer</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog4.jpeg"
+                        data-details-text="The most sweet dog">
+                        <img src="images/dog4.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Pushok</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog5.jpeg"
+                        data-details-text="The most lazy dog">
+                        <img src="images/dog5.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Sharik</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog1.jpeg"
+                        data-details-text="The most beautiful dog">
+                        <img src="images/dog1.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Buba</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog2.jpeg"
+                        data-details-text="The most dedicated dog">
+                        <img src="images/dog2.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Helper</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog3.jpeg"
+                        data-details-text="The most angry dog">
+                        <img src="images/dog3.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Bummer</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog4.jpeg"
+                        data-details-text="The most sweet dog">
+                        <img src="images/dog4.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Pushok</span>
+                    </a>
+                </li>
+
+                <li class="thumbnails-item">
+                    <a href="#" class="thumbnails-ancor" data-details-image="images/dog5.jpeg"
+                        data-details-text="The most lazy dog">
+                        <img src="images/dog5.jpeg" class="thumbnails-image">
+                        <span class="thumbnails-title">Sharik</span>
+                    </a>
+                </li>
+
+        </section>
+
+    </main>
 
 
-    </ul>
-        <p>
+    <script src="src/dogs.js">
 
-        </p>
-    </div>
-
-
-    
+    </script>
 </body>
+
 </html>

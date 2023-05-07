@@ -1,7 +1,284 @@
-.link-image{
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
+@font-face {
+    font-family: airstream;
+    src: url("../fonts/Airstream-webfont.svg");
+    src: url("../fonts/Airstream-webfont.woff");
 }
 
-//миниатюрки с вертикальным скролингом
+@font-face {
+    font-family: lakeshor;
+    src: url("../fonts/LAKESHOR-webfont.svg");
+    src: url("../fonts/LAKESHOR-webfont.woff");
+}
+
+:root {
+    --thumbnails-image-width: 25vw;
+    --thumbnails-image-height: calc(var(--thumbnails-image-width) * 0.9);
+    --thumbnails-title-height: calc(var(--thumbnails-image-height) * 0.3);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(150, 181, 164, 0.75);
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    background-color: rgb(233, 223, 220);
+    border: 1px solid rgb(61, 16, 16);
+    /* border-radius: 30%; */
+}
+
+.logo {
+    font-size: 1.6em;
+    margin-top: 1ph;
+    margin-bottom: 1ph;
+    text-transform: uppercase;
+    letter-spacing: 1.5em;
+    font-weight: bold;
+    /* потому что при установке расстояния между буквами в начале он не добавляет но добавляет в конце (не знает что это последняя буква) */
+    margin-left: 1.5em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.details-section {
+    /* отступ сверху */
+    margin-top: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* overflow: hidden;
+    border-radius: 20px;
+    height: 35vw; */
+    /* position: relative; */
+    /* transform:scale(1); */
+    transition: 5s;
+}
+
+.details-image {
+    height: 60vw;
+    width: 60vw;
+    border-radius: 50%;
+    border: 1px solid rgb(61, 16, 16);
+}
+
+.details-container {
+    /* относительно него будет выравнивае */
+    position: relative;
+}
+
+.details-title {
+    background-color: rgb(196, 231, 219);
+    font-style: italic;
+    font-size: 2.0em;
+    font-family: airstream;
+    /* чтобы выровнять */
+    position: absolute;
+    left: 15vw;
+    bottom: 5vh;
+    border-radius: 15%;
+}
+
+.thumbnails-ancor {
+    /* убрать подчеткивание с гиперссылок */
+    text-decoration: none;
+}
+
+.thumbnails-list {
+    list-style: none;
+    /* чтобы было по горизонтали */
+    display: flex;
+    /* вертикальный скролинг только этой части */
+    flex-wrap: wrap;
+    /* указываем макс высоту листа и если будет больше высоты то будет скролинг */
+    max-height: 55vh;
+    /* если на этой высоте достаточно фигур - не нужно, иначе нужно */
+    overflow-y: auto;
+    /* установить расстояние между */
+    justify-content: space-around;
+    /* отступы по бокам */
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 3vh;
+    /* gap: 2vw; */
+}
+
+.thumbnails-item {
+    border: solid 1 px rgb(61, 16, 16);
+    border-radius: 50%;
+    /* чтобы браузер не менял */
+    /* такие же как у картинки*/
+    max-width: var(--thumbnails-image-width);
+    min-width: var(--thumbnails-image-width);
+    min-height: calc(var(--thumbnails-image-height) + var(--thumbnails-title-height));
+    /* расстояние по вертикали */
+    margin-top: 3vh;
+    overflow: hidden;
+    border: 1px solid rgb(61, 16, 16);
+}
+
+/* что происходит когда мы наводим курсор */
+.thumbnails-item:hover {
+    border: 2px solid cadetblue;
+    /* при подводе курсора к площади Айтема фигура будет увеличена в 1.1 раз */
+    transform: scale(1.1);
+    /* сколько времени нужно чтобы перевести в состояние трансформ */
+    /* transition:10s; */
+}
+
+.thumbnails-image {
+    height: var(--thumbnails-image-height);
+    width: var(--thumbnails-image-width);
+    /* по умолчанию инлайн - у него по умолчанию свои отступы */
+    display: block;
+}
+
+.thumbnails-title {
+    /* блок чтобы он был под изображением
+    его ширина = картинке
+    высота = процент  */
+    height: var(--thumbnails-title-height);
+    display: block;
+    text-align: center;
+    background-color: rgb(196, 231, 219);
+    font-family: lakeshor;
+}
+
+/* потому что hidden может быть не в Дитейлс Секшион */
+.hidden .details-section {
+    display: none;
+}
+
+/* если мы поместим этот класс в любой другой эелемент - этот элемент исчезает */
+.hidden {}
+
+
+.hidden .thumbnails-item{
+    display: flex;
+    flex-direction: row;
+}
+
+.hidden .thumbnails-list{
+    max-height: 80vh;
+}
+
+.hide-button {
+    font-size: 0.8em;
+    position: absolute;
+    top: 4vh;
+    right: 5vw;
+    background-color: transparent;
+}
+
+.is-point{
+    transform: scale(0.001);
+    transition: 0s;
+}
+
+
+@media(min-width:650px) {
+    body {
+        overflow: hidden;
+    }
+
+    :root {
+        --thumbnails-image-width: 25vw;
+        --thumbnails-image-height: calc(var(--thumbnails-image-width)*0.9);
+        --thumbnails-title-height: calc(var(--thumbnails-image-height)*0.15);
+    }
+
+    main {
+        flex-direction: row-reverse;
+        justify-content: start;
+    }
+
+    .details-section {
+        margin: auto;
+    }
+
+    .details-image {
+        height: 60vw;
+        width: 60vw;
+        margin-right: 8vh;
+    }
+
+    .details-title {
+        font-size: 2em;
+        left: 41%;
+        bottom: 5vh;
+        /* чтобы оставалось на том же месте в картинке */
+        transform: translate(-50%);
+    }
+
+    .thumbnails-list {
+        flex-wrap: nowrap;
+        max-height: 85vh;
+        flex-direction: column;
+        justify-content: start;
+        /* padding-right: 10vw;
+        max-width: 25vw; */
+        /* gap: 3vw; */
+    }
+
+    .hidden .thumbnails-list{
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        justify-content: center;
+    }
+
+    .details-image {
+        height: 40vw;
+        width: 40vw;
+        border-radius: 50%;
+        border: 1px solid rgb(61, 16, 16);
+    }
+
+    .thumbnails-item {
+        max-height: 40vh;
+        max-width: 40vw;
+        /* min-height: var(--thumbnails-image-height); */
+        border-radius: 50%;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+
+
+}
+
+@media(min-width:850px) {
+    .details-image {
+        height: 45vw;
+        width: 45vw;
+        margin-right: 8vh;
+    }
+
+    /* .details-title{
+        font-size: 1.5em;
+    }
+
+    .logo{
+        font-size: 2em;
+    } */
+
+    html {
+        font-size: 1.5rem;
+    }
+
+    /* .hidden .thumbnails-list{
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        justify-content: center;
+    } */
+
+
+
+
+}
