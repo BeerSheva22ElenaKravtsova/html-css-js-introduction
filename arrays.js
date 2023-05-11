@@ -67,7 +67,7 @@ function getMatrixRandomIntNumbers(rows, columns, min, max, minInclusive = true,
     let res = [];
     res.length = rows;
     return [...res].
-        map(() => getArrayRandomIntNumbers(columns, min, max, minInclusive, maxInclusive));
+        map(() => getArrayRandomIntNumbers(columns, min, max));
 }
 
 console.log(getMatrixRandomIntNumbers(20, 20, 0, 4));
