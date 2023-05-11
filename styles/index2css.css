@@ -1,0 +1,15 @@
+.item {
+    margin: auto;
+    font-size: 30px;
+    border: 1px solid gray;
+    height: 30px;
+    width: 30px;
+}
+
+.black {
+    background-color: black;
+}
+
+.white {
+    background-color: white;
+}
