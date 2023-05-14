@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+
+<body>
+    <!-- method get post -->
+    <!-- action - дб указана страничка куда направлять данные -->
+    <!-- method="post" - чтобы введенные данные в адресной строке не отображались  -->
+    <form name="register" action="#" method="post">
+        <!-- прямоугольник и надписать сверху -->
+        <fieldset>
+            <legend>Personal Data</legend>
+            <p>
+                <!-- надпись перед input -->
+                <label for="firstName">First name:</label>
+                <!-- поле где можно что-то вводить -->
+                <!-- вместо id можно поместить внутрь label -->
+                <!-- placeholder подсказка как заполнять -->
+                <!-- autocomplete - запоминать прошлые введенные значения -->
+                <input id="firstName" name="firstName" type="text" placeholder="John" autocomplete="off">
+            </p>
+
+            <p>
+                <label>Last name:
+                    <input name="lastName" type="text" placeholder="Smith" autocomplete="off">
+                </label>
+            </p>
+
+            <p>
+                <label>Email:
+                    <!-- type="email" - поверхностно проверяет соответствие email -->
+                    <!-- required - обязательное поле для заполнения не даст отправить форму без этого -->
+                    <!-- autofocus - курсор автоматически стоит в этом месте при загрузке странички -->
+                    <input name="login" type="email" required autofocus>
+                </label>
+            </p>
+
+            <p>
+                <label>Password:
+                    <!-- type="password" - введенные данные будут на странице точками -->
+                    <input name="pass" type="password" required>
+                </label>
+            </p>
+
+            <p>
+                <!-- выбрать можно только что-то одно -->
+                Gender:
+                <label>Male:
+                    <input name="gender" type="radio" value="male">
+                </label>
+                <label>Female:
+                    <input name="gender" type="radio" value="female">
+                </label>
+                <label>Other:
+                    <input name="gender" type="radio" value="other">
+                </label>
+            </p>
+
+            <p>
+                <!-- выбрать можно несколько вариантов -->
+                Hobby:
+                <label>Sex:
+                    <input name="sex" type="checkBox">
+                </label>
+                <label>Vodka:
+                    <input name="vodka" type="checkBox">
+                </label>
+                <label>Cannabis:
+                    <input name="cannabis" type="checkBox">
+                </label>
+            </p>
+
+            <!-- дата -->
+            <p>
+                <label>Birth date:
+                    <input name="birthDate" type="date">
+                </label>
+            </p>
+
+            <!-- цифра в пределах -->
+            <p>
+                <label>Height:
+                    <input name="height" type="number" min="0" max="250">
+                </label>
+            </p>
+
+
+            <!-- окно с вариантами ответов -->
+            <p>
+                <label>Car:
+                    <select name="car">
+                        <option value="toyota">Toyota</option>
+                        <option value="vw">Volkswagen</option>
+                        <option value="renault">Renault</option>
+                    </select>
+                </label>
+            </p>
+
+            <!-- многострочное поле чтобы его заполнить  можно растянуть его размер-->
+            <p>
+                <label>Comment:
+                    <textarea></textarea>
+                </label>
+            </p>
+
+        </fieldset>
+        <!-- появляется кнопка при нажатии на нее будут направлены данные этой формы -->
+
+        <p> 
+            <input type="submit" value="Send">
+            <!-- тоже самое кнопкой -->
+            <button type="reset">Clear</button>
+            <input type="button" value="Back">
+            <button>Forward</button>
+
+
+        </p>
+    </form>
+
+</body>
+
+</html>

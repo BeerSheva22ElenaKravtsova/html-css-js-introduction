@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn DOM</title>
+    <!-- async - скрипты загружаются параллельно -->
+    <!-- defer - отложенная загрузка (браузер когда доходит до скрипта параллельно загружает скрипт но не выполняет его)-->
+    <!-- преимущество defer - может быть несколько js файлов при этом 1 файл может использовать то что определно в другом
+    нужно чтобы к моменты работы этого скрипта нужно чтобы все были загружены - здесь они все загружаются одновременно но выполняются в том порядке, в котором загружены-->
+    <script src="./dom.js" defer></script>
+</head>
+
+<body>
+    <div id="div1" title="Hello">
+        <p id="p1">First text</p>
+        <p id="p2">Second text</p>
+
+    </div>
+    <p id="other">Other text</p>
+
+    <!-- <script src="./dom.js"></script> -->
+</body>
+
+</html>
