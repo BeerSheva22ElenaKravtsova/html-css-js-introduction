@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: row;
+}
+
+#square-id{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: 40px;
+    height: 40px;
+    border: 1px solid brown;
+}
+
+#game-result{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}

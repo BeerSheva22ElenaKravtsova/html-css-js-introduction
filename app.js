@@ -206,3 +206,5 @@ console.log(`a1 = ${a1}, a2 = ${a2} sum(a1, a2) is ${sum(a1, a2)}`);
 // TypeError - 
 // ReferenceError - обращаемся к переменной которая не определена
 // SyntaxError - ошибка синтаксиса
+
+
