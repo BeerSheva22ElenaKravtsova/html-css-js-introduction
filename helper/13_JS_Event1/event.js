@@ -3,13 +3,16 @@
 button.addEventListener('click', show);//так мы добавим несколько обработчиков на одно событие (клик)
 button.addEventListener('click', e => console.log(e.timeStamp));
 
-const names = [name1,name2];
+const names = [];
+for (let index = 0; index < inputs.children.length; index++) {
+    names.push(inputs.children[index]);  
+}
 names.forEach(n=>n.onkeyup=valueToUpperCase);
 // name1.onkeyup=valueToUpperCase;//это вызывает браузер и при этом он передает объект события
 // name2.onkeyup=valueToUpperCase;
 
 //когда пользователь инициирует событие браузер создает объект по этому событию, мы можем его принять и работать с ним
-
+ 
 function show(event) {
     // console.log(event.target);//после чего произошло событие - клик мышки
     // alert(name1.value);//содержимое того что там находится (то что мы вводим)
@@ -19,7 +22,6 @@ function show(event) {
         p.appendChild(text);//все выводится на экран
         document.body.appendChild(p);
         p.value = '';//очистить поле ввода
-        
     })
 }
 
