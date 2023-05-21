@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- след строка привязывает px к ширине экрана (вместо разрашеющей способности экрана) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="styles/movies.css">
+    <link rel="shortcut icon" href="images/dog-favicon.png" type="image/x-icon">
+</head>
+
+<body>
+
+    <header>
+        <h3 class="logo">Movies</h3>
+    </header>
+
+    <main class="hidden">
+        <section class="details-section">
+            <div class="details-container" id="detailsContainer" >
+                <img src="images/dog1.jpeg" class="details-image">
+                <span class="details-title"> XXXXXXXXX </span>
+                <button class="hide-button"> X </button>
+            </div>
+        </section>
+
+        <section class="thumbnails-section">
+            <ul class="thumbnails-list", id="thumbnailsList">
+            </ul>
+        </section>
+
+    </main>
+
+<!-- module - потокол работы браузера с веб сервером -->
+<script src="src/movies.js" type="module"></script>
+
+    </script>
+</body>
+
+</html>
