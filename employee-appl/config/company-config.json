@@ -1,0 +1,15 @@
+{   
+    "minBirthYear": 1950,
+    "maxBirthYear": 2003,
+ 
+    "minSalary": 7,
+    "maxSalary": 50,
+
+    "departments": [
+        "QA",
+        "Development",
+        "Audit",
+        "Accounting",
+        "Management"
+    ]
+}
