@@ -68,6 +68,29 @@ body {
     background-image: linear-gradient(to left, rgb(107, 143, 107), rgb(229, 242, 229));
 }
 
+.radio-group{
+    display: flex;
+    flex-direction: row;
+    /* margin-top: 2vh; */
+}
+
+.form-control{
+    margin-top: 5vh;
+}
+
+div{
+    margin-top: 1vh;
+}
+
+.header{
+    font-size: larger;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
 @media(max-width:390px) {
     th,td {
        font-size: 0.98em;

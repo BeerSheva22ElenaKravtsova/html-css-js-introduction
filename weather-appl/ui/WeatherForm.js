@@ -10,7 +10,7 @@ const FORM_ID = 'form-id';
 const PROMPT_DAYS = "forecast days";
 const PROMPT_HOUR_TO = "hour to";
 const PROMPT_HOUR_FROM = "hour from";
-  
+   
 export default class WeatherForm {
     #formElement;
     #cityElement;
@@ -148,7 +148,7 @@ export default class WeatherForm {
         </form>
         `
     }
-}
+} 
 
 function setOptionItems(element, options, placeHolder) {
     //options - варианты ответов

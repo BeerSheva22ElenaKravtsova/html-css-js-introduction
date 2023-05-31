@@ -7,7 +7,7 @@ import statisticsConfig from "./config/statistics-config.json" assert {type: "js
 import CompanyService from "./service/CompanyService.js"
 import { range } from "./util/number-functions.js";
 import Spinner from "./ui/Spinner.js";
-const N_EMPLOYEES = 100;
+const N_EMPLOYEES = 3;
 
 const sections = [
     { title: "Employees", id: "employees-table-place" },
@@ -15,15 +15,15 @@ const sections = [
     { title: "Statistics", id: "statistics-place" }
 ];
 
-// const statisticsIndex = sections.findIndex(s => s.title == "Statistics");
-// const employeesIndex = sections.findIndex(s => s.title == "Employees");
+const { minBirthYear, maxBirthYear, minSalary, maxSalary, departments } = companyConfig;
+const { age, salary } = statisticsConfig;
 
 const employeeColumns = [
     { field: "id", headerName: "ID" },
     { field: "name", headerName: "Employee Name" },
     { field: "birthYear", headerName: "Birth Year" },
     { field: "gender", headerName: "Gender" },
-    { field: "salary", headerName: "Salary" },
+    { field: "salary", headerName: "Salary (ILS)" },
     { field: "department", headerName: "Department" }
 ]
 
@@ -40,10 +40,7 @@ const statisticColumns = [
 
 const menu = new ApplicationBar("menu-place", sections, menuHandler);
 const companyService = new CompanyService();
-const { minBirthYear, maxBirthYear, minSalary, maxSalary, departments } = companyConfig;
-const { age, salary } = statisticsConfig;
-
-const employeeForm = new EmployeeForm("employees-form-place");
+const employeeForm = new EmployeeForm("employees-form-place", minBirthYear, maxBirthYear, minSalary, maxSalary, departments);
 const employeeTable = new DataGrid("employees-table-place", employeeColumns, "employeeTable");
 const statisticAgeTable = new DataGrid("statistics-age-place", statisticColumns, "statisticAgeTable");
 const statisticSalaryTable = new DataGrid("statistics-salary-place", statisticColumns, "statisticSalaryTable");
@@ -51,10 +48,9 @@ const statisticSalaryTable = new DataGrid("statistics-salary-place", statisticCo
 
 const spinner = new Spinner("spinners-id");
 
-employeeForm.addHandler(async data => {
-    const employee = getRandomEmployee(minSalary, maxSalary, minBirthYear, maxBirthYear, departments);
+employeeForm.addHandler(async (employee) => {
     await action(companyService.addEmployee.bind(companyService, employee));
-});
+})
 
 async function menuHandler(index) {
     switch (index) {
@@ -63,11 +59,11 @@ async function menuHandler(index) {
             employeeTable.fillData(employeesData, 'employeeTable');
             break;
         }
-        case 1: {
-            const employee = getRandomEmployee(minSalary, maxSalary, minBirthYear, maxBirthYear, departments);
-            await action(companyService.addEmployee.bind(companyService, employee));
-            break;
-        }
+        // case 1: {
+        //     const employee = getRandomEmployee(minSalary, maxSalary, minBirthYear, maxBirthYear, departments);
+        //     await action(companyService.addEmployee.bind(companyService, employee));
+        //     break;
+        // }
         case 2: {
             const ageStatisticsData = await action(companyService.getStatistics.bind(companyService, age.field, age.interval));
             statisticAgeTable.fillData(ageStatisticsData, 'statisticAgeTable');
@@ -79,59 +75,20 @@ async function menuHandler(index) {
     }
 }
 
-const promises = range(0, N_EMPLOYEES).map(() => 
-companyService.addEmployee(getRandomEmployee(minSalary, maxSalary, minBirthYear, maxBirthYear, departments)));
-Promise.all(promises);
-//все по очереди промисы
-
-async function action(serviseFunction) {
+async function action(serviceFn) {
     spinner.start();
-    const res = await serviseFunction();
+    const res = await serviceFn();
     spinner.stop();
     return res;
 }
 
-//добавить кнопки чтобы самим получать сотрудников
-
-// config: min & max Salary
-// форма проверяет
-//это Хэндлер который проверяет и если есть ошибка - он отмечает ошибку на экране
-//радиоБаттон - пол
-//потом идут статистики:
-
-//форма
-//имплои форм
-//эддХэнд - принимает сабмит
-//там будет не баттонЭл - а форма и ОнСабмит
-// там мы определяем функциональность, у которой СабмитФанк принимает объект
-//мы должны написать форму
-//в реальной форме для ввода данных будет:
-//ИД не будет вводиться
-//вводится: имя, зп, 
-//выбирается из списка Департмент, пол (радиоБаттон а не селект)
-//год - календарь
-//взять из даты только год (у нас так сделано)
-
-
-//html inputElements
-//InputTypes
-//range - шкала
-
-//radio - это возможность выбора только 1 значения для тех радио у которых есть
-//в каждом элементе Инпуст есть атрибут Нэйм
-//те радиоБаттоны у которых 1 и тот же Нэйм будет 1 какое-то значение
-//это значение будет значение элемента с этим именем Нэйм
-
-//select - модет быть множ (не 1 пункт а неск)
-
-//formData - 
-//для ЧекБоксов и Рэдио - их мб несколько но ОнЧендж не используется
-
-//если нажимаем на Сабмит:
-//с точки значения семантики (например опр диапазон ЗП - если нет Обвести поле ввода зп в красную рамку и написать причину, почему не прошло)
-// например зп не входит в диапазон
-//и не дать возможность нажать на сабмит
-//диапазон зп проверяет форма (не Мэйн)
+function createRandomEmployees() {
+    const promises = range(0, N_EMPLOYEES).map(() =>
+        companyService.addEmployee(getRandomEmployee(minSalary, maxSalary, minBirthYear,
+            maxBirthYear, departments)));
+    return Promise.all(promises);//все по очереди промисы проверяет и возвращает промис
+}
+action(createRandomEmployees);//внутри action есть await - будет ждать ПРомисы
 
 
 

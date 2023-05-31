@@ -20,13 +20,6 @@ export default class DataGrid {
         }
     }
 
-    // JSON.stringify(this.#cash) === JSON.stringify(rowsData) 
-    // ? console.log(`${tableName} filled from cash`) 
-    // : this.#tBodyElement.innerHTML = rowsData.map(rd => this.#getRow(rd)).join('');
-    //   this.#cash = rowsData;
-    //   console.log(`${tableName} is updated`);
-// }
-
     #getRow(obj) {
         return `<tr>
             ${this.#keys.map(key => `<td id="cell">${obj[key]}</td>`).join('')
