@@ -17,7 +17,7 @@ export default class ApplicationBar{
     #fillButtons(parentId, titles){
         const parentElement = document.getElementById(parentId);
         parentElement.innerHTML = titles.map(t=>
-            `<button> ${t}</button>`).join("");
+            `<button class="main-buttons"> ${t}</button>`).join("");
         this.#buttons = parentElement.childNodes;
     }
 
@@ -28,7 +28,6 @@ export default class ApplicationBar{
 
     #addListeners(){
         this.#buttons.forEach((b,index) => b.addEventListener('click', this.#handler.bind(this,index)));
-
     }
 
     async #handler(index){

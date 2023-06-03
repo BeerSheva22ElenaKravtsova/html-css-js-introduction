@@ -4,7 +4,7 @@ import { count } from "../util/number-functions.js";
 const minId = 100000;
 const maxId = 1000000;
 
-export default class CompanyService {
+export default class CompanyService { 
     #employees;
 
     constructor() {
@@ -25,7 +25,22 @@ export default class CompanyService {
         return id;
     }
 
-getStatistics(field, interval) {
+    removeEmployee(employeeId) {
+        return getPromise(delete this.#employees[employeeId], 150);
+    }
+
+    findEmployeeById(employeeId) {
+        const employee = Object.values(this.#employees).find(employee => employee.id === employeeId);
+        return getPromise(employee, 150);
+    }
+
+    updateEmployee(employee) {
+        const id = employee.id;
+        this.#employees[id] = { ...employee, id };
+        return getPromise(this.#employees[id], 150);
+    }
+
+    getStatistics(field, interval) {
         let array = Object.values(this.#employees);
         const currentYear = new Date().getFullYear();
         if (field == 'birthYear') {
@@ -34,16 +49,16 @@ getStatistics(field, interval) {
         }
         const statisticsObj = count(array, field, interval);
         return getPromise(Object.entries(statisticsObj)
-                .map(e => {
-                    const min = e[0] * interval;
-                    const max = min + interval - 1;
-                    return { min, max, count: e[1] };
-                }), 1000);
+            .map(e => {
+                const min = e[0] * interval;
+                const max = min + interval - 1;
+                return { min, max, count: e[1] };
+            }), 1000);
     }
 
-    getAllEmployees(){
+    getAllEmployees() {
         return getPromise(Object.values(this.#employees), 1000)
-}
+    }
 }
 
 function getPromise(state, timeout) {

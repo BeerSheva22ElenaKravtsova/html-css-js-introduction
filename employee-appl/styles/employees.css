@@ -46,7 +46,7 @@ th:hover,td:hover{
 
 th,td {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 20vw;
+    width: 15vw;
     text-align: center;
     transition: 1s;
 }
@@ -88,8 +88,36 @@ div{
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
+
+.rowElements{
+    display: flex;
+    flex-direction: row;
+}
+
+.link-image{
+    width: 15px;
+    height: 15px;
+}
+
+#employees-form-place{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+/* .table-content {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    justify-self: end;
+  } */
+
 
 @media(max-width:390px) {
     th,td {

@@ -4,15 +4,21 @@ import DataGrid from "./ui/DataGrid.js"
 import { getRandomEmployee } from "./util/random.js"
 import companyConfig from "./config/company-config.json" assert {type: "json"};
 import statisticsConfig from "./config/statistics-config.json" assert {type: "json"};
-import CompanyService from "./service/CompanyService.js"
+// import CompanyService from "./service/CompanyService.js"
+import CompanyServiceRest from "./service/CompanyServiceRest.js"
 import { range } from "./util/number-functions.js";
 import Spinner from "./ui/Spinner.js";
-const N_EMPLOYEES = 3;
+const N_EMPLOYEES =10;
 
 const sections = [
     { title: "Employees", id: "employees-table-place" },
     { title: "Add Employee", id: "employees-form-place" },
     { title: "Statistics", id: "statistics-place" }
+];
+
+const actions = [
+    { title: "Delete", id: "delete", picture: "../images/delete.png" },
+    { title: "Update", id: "update", picture: "../images/change.png" },
 ];
 
 const { minBirthYear, maxBirthYear, minSalary, maxSalary, departments } = companyConfig;
@@ -38,33 +44,64 @@ const statisticColumns = [
 //     {field: "numberOfEmployees", headerName: "Number of Employees"}
 // ]
 
+const actionsHandler = [
+    {
+        id: 'delete',
+        handler: async (rowId) => {
+            const employee = employeeTable.deleteRow(rowId);
+            await action(companyService.removeEmployee.bind(companyService, employee.id));
+        }
+    },
+    {
+        id: 'update',
+        handler: async (rowId) => {
+            const employee = employeeTable.deleteRow(rowId);
+            const id = employee.id;
+            const gender = employee.gender;
+            await action(companyService.removeEmployee.bind(companyService, id));
+
+            employeeForm.openPrescribedForm(employee);
+            employeeForm.addHandler(async (employee) => {
+                employee.id = id;
+                employee.gender = gender;
+                await action(companyService.updateEmployee.bind(companyService, employee))
+                    .then(async () => {
+                        employeeForm.closePrescribedForm();
+                        const employeesData = await action(companyService.getAllEmployees.bind(companyService));
+                        employeeTable.fillData(employeesData, 'employeeTable')
+                    })
+            });
+        }
+    }
+];
+
 const menu = new ApplicationBar("menu-place", sections, menuHandler);
-const companyService = new CompanyService();
+const companyService = new CompanyServiceRest();
 const employeeForm = new EmployeeForm("employees-form-place", minBirthYear, maxBirthYear, minSalary, maxSalary, departments);
-const employeeTable = new DataGrid("employees-table-place", employeeColumns, "employeeTable");
-const statisticAgeTable = new DataGrid("statistics-age-place", statisticColumns, "statisticAgeTable");
-const statisticSalaryTable = new DataGrid("statistics-salary-place", statisticColumns, "statisticSalaryTable");
+const employeeTable = new DataGrid("employees-table-place", employeeColumns, actions, actionsHandler);
+const statisticAgeTable = new DataGrid("statistics-age-place", statisticColumns, [], []);
+const statisticSalaryTable = new DataGrid("statistics-salary-place", statisticColumns, [], []);
 // const statisticGenderTable = new DataGrid("statistics-gender-table", statisticGenderColumns);
 
 const spinner = new Spinner("spinners-id");
 
-employeeForm.addHandler(async (employee) => {
-    await action(companyService.addEmployee.bind(companyService, employee));
-})
-
 async function menuHandler(index) {
     switch (index) {
         case 0: {
+            employeeForm.hideForm(true);
             const employeesData = await action(companyService.getAllEmployees.bind(companyService));
             employeeTable.fillData(employeesData, 'employeeTable');
             break;
         }
-        // case 1: {
-        //     const employee = getRandomEmployee(minSalary, maxSalary, minBirthYear, maxBirthYear, departments);
-        //     await action(companyService.addEmployee.bind(companyService, employee));
-        //     break;
-        // }
+        case 1: {
+            employeeForm.hideForm(false);
+            employeeForm.addHandler(async (employee) => {
+                await action(companyService.addEmployee.bind(companyService, employee));
+            })
+            break;
+        }
         case 2: {
+            employeeForm.hideForm(true);
             const ageStatisticsData = await action(companyService.getStatistics.bind(companyService, age.field, age.interval));
             statisticAgeTable.fillData(ageStatisticsData, 'statisticAgeTable');
 
@@ -89,9 +126,3 @@ function createRandomEmployees() {
     return Promise.all(promises);//все по очереди промисы проверяет и возвращает промис
 }
 action(createRandomEmployees);//внутри action есть await - будет ждать ПРомисы
-
-
-
-//добавить в Дата Грид возможность делать действия над строчками таблицы - они будут передаваться с контроллера
-//это может касаться строк - удаление служащего, изменение служащего
-//требует синхронизации данных и таблиц

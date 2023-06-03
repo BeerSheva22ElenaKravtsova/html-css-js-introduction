@@ -1,0 +1,36 @@
+{
+  "employees": [
+    {
+      "id": 123,
+      "name": "Vasya",
+      "gender": "male",
+      "department": "QA",
+      "salary": 10000,
+      "birthYear": 2000
+    },
+    {
+      "id": 124,
+      "name": "Asya",
+      "gender": "female",
+      "department": "Management",
+      "salary": 15000,
+      "birthYear": 1990
+    },
+    {
+      "name": "Sara",
+      "gender": "female",
+      "salary": 10000,
+      "department": "Development",
+      "birthYear": 2000,
+      "id": 125
+    },
+    {
+      "name": "Vova",
+      "gender": "male",
+      "salary": 20000,
+      "department": "Audit",
+      "birthYear": 2000,
+      "id": 126
+    }
+  ]
+}

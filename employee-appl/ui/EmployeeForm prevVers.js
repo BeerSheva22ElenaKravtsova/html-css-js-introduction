@@ -87,31 +87,5 @@ export default class EmployeeForm{
         //     this.#buttonElement.onclick = () => resolved();
         // })
     }
-
-    // #buildForm(){
-    //     const parentElement = document.getElementById(this.parentId)
-    //     parentElement.innerHTML += `
-    //     <form id="${this.parentId}-${FORM_ID}" class="form-control">
-    //         <div class="row-input">
-    //             <input id="${this.parentId}-${ID_ID}" type="text" class="select-control" required>
-    //             <input id="${this.parentId}-${NAME_ID}" type="text" class="select-control" required>
-    //         </div>
-
-    //         <div class="row-input">
-    //             <select id="${this.parentId}-${BIRTH_YEAR_ID}" class="select-control" required></select>
-    //             <select id="${this.parentId}-${GENDER_ID}" class="select-control" required></select>
-    //         </div>
-
-    //         <div class="row-input">
-    //         <select id="${this.parentId}-${SALARY_ID}" class="select-control" required></select>
-    //         <select id="${this.parentId}-${DEPARTMENT_ID}" class="select-control" required></select>
-    //     </div>
-    //         <div class="buttons-group">
-    //             <button type="submit">Submit</button>
-    //             <button type="reset">Reset</button>
-    //         </div>
-    //     </form>
-    //     `
-    // }
 }
 
