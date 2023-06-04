@@ -24,7 +24,7 @@ export default class CompanyService {
         } while (this.#employees[id]);
         return id;
     }
-
+ 
     removeEmployee(employeeId) {
         return getPromise(delete this.#employees[employeeId], 150);
     }

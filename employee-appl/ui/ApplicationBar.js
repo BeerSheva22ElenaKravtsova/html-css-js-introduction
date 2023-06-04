@@ -13,7 +13,7 @@ export default class ApplicationBar{
         this.#setSectionsElements(sections.map(s=>s.id));
         this.#addListeners();
     }
- 
+  
     #fillButtons(parentId, titles){
         const parentElement = document.getElementById(parentId);
         parentElement.innerHTML = titles.map(t=>

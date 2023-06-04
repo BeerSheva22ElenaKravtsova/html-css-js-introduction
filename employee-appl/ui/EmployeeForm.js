@@ -16,7 +16,6 @@ export default class EmployeeForm {
     #minSalary;
     #maxSalary;
     #departments;
-    #cancelUpdateButton;
 
     constructor(parentId, minBirthYear, maxBirthYear, minSalary, maxSalary, departments) {
         this.#parentId = parentId;
@@ -25,7 +24,6 @@ export default class EmployeeForm {
         this.#minSalary = minSalary;
         this.#maxSalary = maxSalary;
         this.#departments = departments;
-        this.#cancelUpdateButton = null;
         this.#dataObj = {};
         this.#fillForm();
         this.#setElements();
@@ -98,14 +96,11 @@ export default class EmployeeForm {
             this.#dataObj.salary = formData.get('salary');
             this.#dataObj.department = formData.get('department');
             await submitFunction(this.#dataObj);
+            this.#formElement.reset();
         }
         this.#formElement.onreset = () => {
             this.#dataObj = {};
             this.#setSelectOptions();
-        }
-        this.#cancelUpdateButton.onsubmit = async () => {
-            await submitFunction(this.#dataObj);
-            this.closePrescribedForm();
         }
     }
 
@@ -119,11 +114,10 @@ export default class EmployeeForm {
     }
 
     openPrescribedForm(employee) {
-        this.createCancelUpdateButton()
         this.setPrescribedValues(employee);
         this.setFieldsDisabled(true);
-        this.hideForm(false);
         this.setButtonsDisabled(true);
+        this.hideForm(false);
     }
 
     setPrescribedValues(employee) {
@@ -137,7 +131,6 @@ export default class EmployeeForm {
 
     closePrescribedForm() {
         this.hideForm(true);
-        this.deleteCancelUpdateButton();
         this.setButtonsDisabled(false);
         this.setFieldsDisabled(false);
         const nullEmployee = {
@@ -146,24 +139,6 @@ export default class EmployeeForm {
             department: null
         }
         this.setPrescribedValues(nullEmployee);
-    }
-
-    createCancelUpdateButton() {
-        const deleteButton = document.createElement("button");
-        deleteButton.type = "submit";
-        deleteButton.id = "delete";
-        deleteButton.textContent = "Cancel update";
-        const formElement = document.getElementById(`${this.#parentId}-${FORM_ID}`);
-        formElement.appendChild(deleteButton);
-        this.#cancelUpdateButton = deleteButton;
-      }
-    
-    deleteCancelUpdateButton() {
-        if (this.#cancelUpdateButton) {
-          const formElement = document.getElementById(`${this.#parentId}-${FORM_ID}`);
-          formElement.removeChild(this.#cancelUpdateButton);
-          this.#cancelUpdateButton = null;
-        }
     }
 
     setButtonsDisabled(setter){

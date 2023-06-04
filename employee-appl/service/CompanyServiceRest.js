@@ -13,77 +13,73 @@ export default class CompanyServiceRest {
     constructor() {
     }
 
-    addEmployee(employee) {
-        const id = this.#getId();
-        fetch(URL, {
+    async addEmployee(employee) {
+        return fetch(URL, {
             method: 'POST',
-            headers: { 'Content-Type': "application/json" },
-            body: JSON.stringify({ ...employee, id })
-        }).then(response => response.json());
-            return getPromise(this.findEmployeeById(id), 150);
-    }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(employee),
+        })
+            .then(response => response.json());
+        }
 
-    #getId() {
-        let id;
-        do {
-            id = getRandomInt(minId, maxId);
-        } while (this.findEmployeeById(id));
-        return id;
-    }
-
-    removeEmployee(employeeId) {
-        const thisURL = `${URL}/${employeeId}`
-        getPromise(fetch(thisURL, {
+    async removeEmployee(employeeId) {
+        const thisURL = `${URL}/${employeeId}`;
+        return fetch(thisURL, {
             method: 'DELETE',
-            headers: { 'Content-Type': "application/json" },
-        }).then(response => response.json()).
-            then(data => console.log(data)), 150);
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(response => response.json())
     }
 
     async findEmployeeById(employeeId) {
-        const thisURL = `${URL}/${employeeId}`
-        return getPromise(fetch(thisURL)
-            .then(response => response.json()), 150);
+        const thisURL = `${URL}/${employeeId}`;
+        return fetch(thisURL)
+            .then(response => response.json())
+            .then(data => data);
     }
 
-    updateEmployee(employee) {
-        const id = employee.id;
-        const thisURL = `${URL}/${id}`
-        return getPromise(fetch(thisURL, {
-            method: 'PUT',
-            headers: { 'Content-Type': "application/json" },
-            body: JSON.stringify(this.findEmployeeById(id) = { ...employee, id })//объекта не JSON
-        }).then(response => response.json()), 150);
-        // this.#employees[id] = { ...employee, id };
-        // return getPromise(this.#employees[id], 150);
+    async updateEmployee(employee) {
+    const id = employee.id;
+    const thisURL = `${URL}/${id}`;
+    return fetch(thisURL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: 
+      JSON.stringify({ id, ...employee }),
+    })
+      .then(response => response.json())
+      .then(data => data);
     }
 
-    getStatistics(field, interval) {
-        let array = this.getAllEmployees();
+  async getStatistics(field, interval) {
+    return this.getAllEmployees()
+      .then(array => {
         const currentYear = new Date().getFullYear();
         if (field == 'birthYear') {
             array = array.map(e => ({ 'age': currentYear - e.birthYear }));
             field = 'age';
         }
         const statisticsObj = count(array, field, interval);
-        return getPromise(Object.entries(statisticsObj)
+        return Object.entries(statisticsObj)
             .map(e => {
                 const min = e[0] * interval;
                 const max = min + interval - 1;
                 return { min, max, count: e[1] };
-            }), 1000);
+            })
+      });
+  }
+
+    async getAllEmployees() {
+        return fetch(URL)
+        .then(response => 
+            response.json()
+        ).then(data => data);
     }
 
-    getAllEmployees() {
-        return getPromise(fetch(URL).then(response => response.json()), 1000);
-    }
+    // async getAllEmployees(id) {
+    //     return fetch(`${URL}/${id}`)
+    //     .then(response => 
+    //         response.json()
+    //     ).then(data => data);
+    // }
 }
-
-function getPromise(state, timeout) {
-    return new Promise(resolve => setTimeout(() => resolve(state), timeout))
-}
-
-// function removeIdField(employee) {
-//     const { id, ...employeeWithoutId } = employee;
-//     return employeeWithoutId;
-// }

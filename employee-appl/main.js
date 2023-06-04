@@ -8,7 +8,7 @@ import statisticsConfig from "./config/statistics-config.json" assert {type: "js
 import CompanyServiceRest from "./service/CompanyServiceRest.js"
 import { range } from "./util/number-functions.js";
 import Spinner from "./ui/Spinner.js";
-const N_EMPLOYEES =10;
+const N_EMPLOYEES = 5;
 
 const sections = [
     { title: "Employees", id: "employees-table-place" },
@@ -39,32 +39,31 @@ const statisticColumns = [
     { field: "count", headerName: "Number of Employees" }
 ]
 
-// const statisticGenderColumns = [
-//     {field: "gender", headerName: "Gender"},
-//     {field: "numberOfEmployees", headerName: "Number of Employees"}
-// ]
-
 const actionsHandler = [
     {
         id: 'delete',
         handler: async (rowId) => {
-            const employee = employeeTable.deleteRow(rowId);
+            const employee = employeeTable.getData(rowId);
+            employeeTable.deleteRow(rowId);
+            // console.log(rowId)
+            // const employee = companyService.getById(rowId);
             await action(companyService.removeEmployee.bind(companyService, employee.id));
         }
     },
     {
         id: 'update',
         handler: async (rowId) => {
-            const employee = employeeTable.deleteRow(rowId);
+            const employee = employeeTable.getData(rowId);
             const id = employee.id;
             const gender = employee.gender;
-            await action(companyService.removeEmployee.bind(companyService, id));
-
+            const birthYear = employee.birthdate;
             employeeForm.openPrescribedForm(employee);
+
             employeeForm.addHandler(async (employee) => {
                 employee.id = id;
+                employee.birthYear = birthYear;
                 employee.gender = gender;
-                await action(companyService.updateEmployee.bind(companyService, employee))
+                await action(await companyService.updateEmployee.bind(companyService, employee))
                     .then(async () => {
                         employeeForm.closePrescribedForm();
                         const employeesData = await action(companyService.getAllEmployees.bind(companyService));
@@ -77,11 +76,12 @@ const actionsHandler = [
 
 const menu = new ApplicationBar("menu-place", sections, menuHandler);
 const companyService = new CompanyServiceRest();
+// const companyService = new CompanyService();
+
 const employeeForm = new EmployeeForm("employees-form-place", minBirthYear, maxBirthYear, minSalary, maxSalary, departments);
 const employeeTable = new DataGrid("employees-table-place", employeeColumns, actions, actionsHandler);
 const statisticAgeTable = new DataGrid("statistics-age-place", statisticColumns, [], []);
 const statisticSalaryTable = new DataGrid("statistics-salary-place", statisticColumns, [], []);
-// const statisticGenderTable = new DataGrid("statistics-gender-table", statisticGenderColumns);
 
 const spinner = new Spinner("spinners-id");
 
@@ -119,10 +119,11 @@ async function action(serviceFn) {
     return res;
 }
 
-function createRandomEmployees() {
+async function createRandomEmployees() {
     const promises = range(0, N_EMPLOYEES).map(() =>
         companyService.addEmployee(getRandomEmployee(minSalary, maxSalary, minBirthYear,
             maxBirthYear, departments)));
-    return Promise.all(promises);//все по очереди промисы проверяет и возвращает промис
+    return await Promise.all(promises);//все промисы проверяет и возвращает промис
 }
-action(createRandomEmployees);//внутри action есть await - будет ждать ПРомисы
+
+// action(createRandomEmployees);//внутри action есть await - будет ждать ПРомисы
