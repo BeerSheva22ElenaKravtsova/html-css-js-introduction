@@ -22,7 +22,7 @@ const wordsLimit = 2;
 
 const httpPrefixElement = moviesObj.httpPrefix;
 const thumbnailsList = document.getElementById("thumbnailsList");
-
+ 
 function setThumbnailsItem() {
     let res = [];
     res.length = moviesObj.results.length;

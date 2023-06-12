@@ -54,7 +54,7 @@ export default class EmployeeForm {
                 <label class="label-input" for="${this.#parentId}-${BIRTH_YEAR_ID}">Birth date: </label>
                 <input type="date" id="${this.#parentId}-${BIRTH_YEAR_ID}" class="input-control" name="birthYear" min="${this.#minBirthYear}-01-01" max="${this.#maxBirthYear}-12-31" required>
             </div>
-
+ 
             <div class="radio-form-control" id="${this.#parentId}-${GENDER_ID}">
                 <div class = "radio-group">
                     <div class = "radio-gender-control">
@@ -84,7 +84,7 @@ export default class EmployeeForm {
 
         </form>
         `
-    }
+    } 
 
     addHandler(submitFunction) {
         this.#formElement.onsubmit = async (event) => {

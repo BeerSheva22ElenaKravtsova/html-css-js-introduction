@@ -17,7 +17,7 @@ export default class ApplicationBar{
     #fillButtons(parentId, titles){
         const parentElement = document.getElementById(parentId);
         parentElement.innerHTML = titles.map(t=>
-            `<button class="main-buttons"> ${t}</button>`).join("");
+            `<button class="${t == "Log In" || t == "Log Out" ? "main-buttons-right" : "main-buttons-left"}"> ${t}</button>`).join("");
         this.#buttons = parentElement.childNodes;
     }
 
@@ -44,6 +44,10 @@ export default class ApplicationBar{
 
             this.#activeIndex = index;
         }
+    }
+
+    getActiveIndex(){
+        return this.#activeIndex;
     }
 }
 

@@ -180,7 +180,7 @@ main {
     transition: 0s;
 }
 
-
+ 
 @media(min-width:650px) {
     body {
         overflow: hidden;

@@ -9,6 +9,7 @@ import CompanyServiceRest from "./service/CompanyServiceRest.js"
 import { range } from "./util/number-functions.js";
 import Spinner from "./ui/Spinner.js";
 const N_EMPLOYEES = 5;
+let activeIndex = null;
 
 const sections = [
     { title: "Employees", id: "employees-table-place" },
@@ -75,7 +76,7 @@ const actionsHandler = [
 ];
 
 const menu = new ApplicationBar("menu-place", sections, menuHandler);
-const companyService = new CompanyServiceRest();
+const companyService = new CompanyServiceRest(dataChangeFn);
 // const companyService = new CompanyService();
 
 const employeeForm = new EmployeeForm("employees-form-place", minBirthYear, maxBirthYear, minSalary, maxSalary, departments);
@@ -85,7 +86,22 @@ const statisticSalaryTable = new DataGrid("statistics-salary-place", statisticCo
 
 const spinner = new Spinner("spinners-id");
 
+ function dataChangeFn(employees){
+    switch(menu.getActiveIndex()){
+        case 0: {
+            employeeTable.fillData(employees, 'employeeTable');
+            break;
+        }
+        case 2: {
+             statisticProcessing(employees);
+            break;
+        }
+    }
+}
+
 async function menuHandler(index) {
+    activeIndex = index;
+
     switch (index) {
         case 0: {
             employeeForm.hideForm(true);
@@ -102,21 +118,32 @@ async function menuHandler(index) {
         }
         case 2: {
             employeeForm.hideForm(true);
-            const ageStatisticsData = await action(companyService.getStatistics.bind(companyService, age.field, age.interval));
-            statisticAgeTable.fillData(ageStatisticsData, 'statisticAgeTable');
-
-            const salaryStatisticsData = await action(companyService.getStatistics.bind(companyService, salary.field, salary.interval));
-            statisticSalaryTable.fillData(salaryStatisticsData, 'statisticSalaryTable');
+            await statisticProcessing();
             break;
         }
     }
 }
 
+async function statisticProcessing(employees){
+    const ageStatisticsData = await action(companyService.getStatistics.bind(companyService, age.field, age.interval, employees));
+            statisticAgeTable.fillData(ageStatisticsData, 'statisticAgeTable');
+
+    const salaryStatisticsData = await action(companyService.getStatistics.bind(companyService, salary.field, salary.interval, employees));
+            statisticSalaryTable.fillData(salaryStatisticsData, 'statisticSalaryTable');
+}
+
 async function action(serviceFn) {
     spinner.start();
-    const res = await serviceFn();
-    spinner.stop();
-    return res;
+    try {
+        const res = await serviceFn();
+        return res;
+    }
+    catch (error) {
+        alert(error.code ? 'server responded with ' + code 
+        : 'server unavaliable');
+    } finally {
+        spinner.stop();
+    }
 }
 
 async function createRandomEmployees() {

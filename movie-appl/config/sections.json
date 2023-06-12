@@ -1,0 +1,29 @@
+{
+    "menuSections": [
+        { "title": "Home Page", "id": "home-page" },
+        { "title": "Details", "id": "details-page" },
+        { "title": "Search", "id": "search-page" },
+        { "title": "Search Result", "id": "search-results-page" },
+        { "title": "Watching List", "id": "watchList-page" },
+        { "title": "Favorite List", "id": "favoriteList-page" },
+        { "title": "Log In", "id": "logIn-page" },
+        { "title": "Log Out", "id": "logOut-page" }
+    ],
+     
+    "moviesColumns": [
+        { "field": "poster_path", "headerName": "Poster" },
+        { "field": "title", "headerName": "title" },
+        { "field": "release_date", "headerName": "Release Date" },
+        { "field": "vote_average", "headerName": "Vote average" }
+    ],
+    
+    "detailsMoviesColumns": [
+        { "field": "backdrop_path", "headerName": "Background" },
+        { "field": "title", "headerName": "title" },
+        { "field": "release_status", "headerName": "Release Status" },
+        { "field": "release_date", "headerName": "Release Date" },
+        { "field": "vote_average", "headerName": "Vote average" },
+        { "field": "overview", "headerName": "Overview" },
+        { "field": "genres", "headerName": "Genres" }
+    ]
+}

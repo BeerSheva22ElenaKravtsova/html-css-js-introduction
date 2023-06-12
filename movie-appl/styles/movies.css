@@ -1,0 +1,271 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EDE7E7;
+}
+ 
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+  }
+  
+  .logotype-icon {
+    width: 50px;
+  }
+  
+  .logo-image {
+    display: block;
+    width: 30vh;
+    height: auto;
+  }
+  
+  .logo {
+    border-bottom: 1px solid #262626;
+    flex-grow: 1;
+    margin-left: 70vh;
+  }
+  
+  .logo h3 {
+    margin: 0;
+  }
+
+  .menu-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .menu-buttons button {
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+
+  .button-page-image{
+    background-color: #EDE7E7;
+    border: none;
+  }
+
+  .button-under-image{
+    background-color: #262626;
+    border: none;
+  }
+
+.logo,
+#caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100em;
+    font-size: 20px;
+    font-weight: 600;
+    color: #262626;
+    background-color: #EDE7E7;
+}
+
+div {
+    margin-top: 1vh;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+tr {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 75vh;
+    overflow-y: auto;
+    justify-content: flex-start;
+    color: #EDE7E7;
+}
+
+td {
+    flex-basis: 25%;
+    padding: 4px;
+    text-align: center;
+    font-size: 10px;
+    display: inline-block;
+    max-width: 250px;
+    max-height: 350px;
+    box-sizing: border-box;
+    background-color: #282626;
+}
+
+td .image {
+    max-width: 150px;
+    max-height: 200px;
+}
+  
+  .detailsPage td {
+    padding: 4px;
+    text-align: center;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    color: #262626;
+    background-color: #EDE7E7; /* Изменено цвет текста для видимости */
+  }
+  
+  .detailsPage td .image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+.button-image,
+.main-buttons {
+    color: #EDE7E7;
+    background-color: #F66C13;
+    border-color: #F66C13;
+}
+
+.link-image {
+    width: 15px;
+    height: 15px;
+    transition: 1s;
+}
+
+.table-container {
+    top: 5vh;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.link-image:hover {
+    transform: scale(1.5);
+}
+
+td.customSingleColumnRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-height: 80vh;
+    margin: 0 auto;
+}
+
+td.customSingleColumnRow .image {
+    max-width: 100vh;
+    max-height: 100vh;
+    margin-top: 10px;
+}
+
+td.customSingleColumnRow div {
+    text-align: left;
+    font-size: 16px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.login-container {
+    display: flex;
+}
+
+.registration-form,
+.login-form {
+    margin-top: 1vh;
+    width: 80%;
+    box-sizing: border-box;
+    border-color: #03240e;
+    border-width: 0.5px;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.login-form {
+    width: 80%;
+    float: none;
+}
+
+.label-input-log {
+    margin-top: 1vh;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.input-control-log {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.log-in-buttons,
+.registration-buttons {
+    display: block;
+    margin-top: 10px;
+}
+
+@media(min-width: 450px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .registration-form,
+    .login-form {
+        flex-basis: 45%;
+    }
+}
+
+@media(min-width: 650px) {
+    .logo {
+        font-size: 30px;
+    }
+
+    td {
+        font-size: 16px;
+    }
+
+    @media (min-width: 650px) {
+        .registration-form,
+        .login-form {
+            width: 160%;
+            flex-basis: 70%;
+        }
+    }
+}
+
+@media(max-width: 390px) {
+    td {
+        font-size: 0.98em;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .registration-form,
+    .login-form {
+        width: 100%;
+        float: none;
+    }
+}

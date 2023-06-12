@@ -1,0 +1,29 @@
+{
+    "baseUrl": "http://localhost:3500/users",
+
+    "language": "?language=en-US",
+ 
+    "baseUrlNowPlaying": "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=",
+    "baseUrlUpcoming": "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=",
+    "baseUrlPopular": "https://api.themoviedb.org/3/movie/popular?language=en-US&page=",
+    "discover_movie": "https://api.themoviedb.org/3/discover/movie?",
+    
+    "pictureURL": "https://image.tmdb.org/t/p/original",
+    "movieDetails": "https://api.themoviedb.org/3/movie/",
+    "genres": "https://api.themoviedb.org/3/genre/movie/list?language=en-US",
+    "include_adult": "https://api.themoviedb.org/3/search/movie?include_adult=false",
+    "countries": "https://api.themoviedb.org/3/configuration/countries?language=en-US",
+    "languages": "https://api.themoviedb.org/3/configuration/languages?language=en-US",
+
+    "apiKey": "&api_key=2c46288716a18fb7aadcc2a801f3fc6b",
+
+    "sortValues":[
+    "popularity.asc",
+    "popularity.desc", 
+    "revenue.asc",
+    "revenue.desc", 
+    "primary_release_date.asc",
+    "primary_release_date.desc", 
+    "vote_average.asc",
+    "vote_average.desc"]
+}
